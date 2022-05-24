@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+
+<html lang="cs" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Slovíčka</title>
+</head>
+<body style="background-color: antiquewhite;">
+    <div style="text-align:center;">
+        <div style="text-align:center;">
+            <textarea id="t1" style="font-size:18px;" disabled></textarea>
+            <br />
+            <textarea id="t2" style="font-size:18px;" onkeypress="zmackni(event);"></textarea>
+            <br />
+            <textarea id="t3" style="font-size:18px;" disabled></textarea>
+            <br />
+            <textarea id="t4" style="font-size:18px;" disabled></textarea>
+            <br />
+            <input type="button" style="height:50px; width:50px; font-size:18px;" value="OK" title="OK" id="c1" onclick="vyhodnot();" />
+            <input type="button" style="height: 50px; width: 50px; font-size:18px;" value="?" title="OK" id="c2" onclick="nevim();" />
+            <br>
+            <textarea id="t5" style="font-size:18px;" disabled></textarea>
+            <br />
+            <textarea id="t6" style="font-size:18px;"></textarea>
+            <br />
+            <input type="button" style="height: 50px; width: 50px; font-size:18px;" value="OD" title="OD" id="c3" onclick="od();" />
+            <br>
+        </div>
+    </div>
+        <script src="slovicka.js" charset="utf-8"></script>
+        <script>
+            function od() {
+                c = parseInt(document.getElementById("t6").value) ;
+                priradNove ();
+            };
+            f = 10;
+            c = 0;
+            var c1 = 0;
+            var g = 0;
+           var i0, chybove;
+           chybove =0;
+           a.reverse();
+           b.reverse();
+                      function priradNove () {
+       c1 =0;
+               c = c -chybove;
+            g= f+ c;
+            chybove =0;
+             d =[];
+             e = [];
+            for ( i0 = 0; i0 <= f; i0++ )
+            { 
+                d[i0] = a[ c + i0];
+                e[i0] = b[c + i0];
+                
+            }
+            document.getElementById("t4").value = c + "/" + (d.length - 1) + ". Další laťka na: " + g;
+            document.getElementById("t5").value =  c + "/" + (a.length -1);
+        };
+        priradNove();
+            document.getElementById("t1").value = a[c1];
+            function vyhodnot() {
+
+                if (document.getElementById("t2").value == e[c1]) {
+                    document.getElementById("t3").value = "Výborně.";
+                    document.getElementById("t4").value = c1 + "/" + (d.length - 1) + ". Další laťka na: " + g;
+                    document.getElementById("t5").value =  c + "/" + (a.length -1);
+                    c1 = c1 + 1;
+                c = c + 1;
+                if (c1 > d.length-1) priradNove();
+
+                } else {
+                    
+                    document.getElementById("t3").value = "Chyba. Bylo to: " + e[c1];
+                    chybove = chybove + 1;
+                    document.getElementById("t4").value = c1 + "/" + (d.length - 1) + ". Další laťka na: " + g;
+                    document.getElementById("t5").value =  c + "/" + (a.length -1);
+                    d[d.length] = d[c1];
+                    e[e.length] = e[c1];
+                 
+                };
+                
+                document.getElementById("t1").value = d[c1];
+                document.getElementById("t2").value = "";
+
+            };
+            function nevim() {
+                document.getElementById("t3").value = "Nápověda. Je to: " + e[c1];
+                chybove = chybove + 2;
+                document.getElementById("t4").value = c1 + "/" + (d.length - 1) + ". Další laťka na: " + g;
+                document.getElementById("t5").value =  c + "/" + (a.length -1);
+                d[d.length] = d[c1];
+                e[e.length] = e[c1];
+                d[d.length] = e[c1];
+                e[e.length] = d[c1];
+                
+            };
+
+
+            function zmackni(event) {
+                if (event.keyCode == 13 ) vyhodnot();
+            }
+        </script>
+</body>
+
+</html>
